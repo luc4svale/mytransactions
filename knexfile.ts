@@ -6,7 +6,7 @@ const dbConnection =
     ? {
         filename: env.DATABASE_URL,
       }
-    : env.DATABASE_CLIENT
+    : env.DATABASE_URL
 
 const knexConfig: Knex.Config = {
   client: env.DATABASE_CLIENT,
