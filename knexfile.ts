@@ -1,11 +1,16 @@
 import type { Knex } from 'knex'
 import { env } from './src/env'
 
+const dbConnection =
+  env.DATABASE_CLIENT === 'better-sqlite3'
+    ? {
+        filename: env.DATABASE_URL,
+      }
+    : env.DATABASE_CLIENT
+
 const knexConfig: Knex.Config = {
-  client: 'better-sqlite3',
-  connection: {
-    filename: env?.DATABASE_URL,
-  },
+  client: env.DATABASE_CLIENT,
+  connection: dbConnection,
   useNullAsDefault: true,
   migrations: {
     extension: 'ts',
